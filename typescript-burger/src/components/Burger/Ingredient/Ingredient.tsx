@@ -116,14 +116,15 @@ interface literal { [s: string]: () => any}
 const ingredient = (props : string) => {
     let ingredients: literal = {
     'BreadBottom' : () => <BreadBottom/>,
-        'BreadTop' : () => <BreadTop/>,
-        'Seeds1' : () => <Seeds1/>,
-        'Seeds2' : () => <Seeds2/>,
+        'BreadTop' : () => <BreadTop>
+            <Seeds1/>
+            <Seeds2/>
+        </BreadTop>,
         'Meat' : () => <Meat/>,
         'Cheese' : () => <Cheese/>,
         'Salad' : () => <Salad/>,
         'Bacon' : () => <Bacon/>,
-        'Default' : () => null
+        'Default' : () => null 
     }
     return (ingredients[props] || ingredients['Default'])();
 }
