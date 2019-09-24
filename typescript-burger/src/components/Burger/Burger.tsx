@@ -23,8 +23,29 @@ const BurgerDiv = styled.div`
     }
 `;
 
-class Burger extends Component{
+interface IBurgerProps {
+    ingredients : {
+        BreadBottomSeeds : number; 
+        BreadTopSeeds : number;
+        BreadBottom : number;
+        BreadTop : number;
+        Meat : number;
+        Cheese : number;
+        Salad : number;
+        Bacon : number;
+    }
+    [key: IBurgerProps]: number;
+}
 
+class Burger extends Component<IBurgerProps>{
+
+    readonly ingredients = Object.keys(this.props.ingredients)
+    .map(ingName => {
+        return [...Array(this.props.ingredients[ingName]].map((_, i) => {
+            Ingredient(ingName);
+        });
+    });
+ 
     render(){
         return <BurgerDiv>
             {Ingredient("BreadTop")}
@@ -34,5 +55,4 @@ class Burger extends Component{
         </BurgerDiv>
     }
 }
-
 export default Burger;
