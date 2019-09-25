@@ -1,13 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const BreadBottom = styled.main`
-    height: 13%;
+const BreadBottom = styled.div`
+    height: 15%;
     width: 80%;
     background: linear-gradient(#F08E4A, #e27b36);
     border-radius: 0 0 30px 30px;
     box-shadow: inset -15px 0 #c15711;
     margin: 2% auto;
+    position: relative;
 `;
 
 const BreadTop = styled.div`
@@ -113,24 +114,24 @@ const Bacon = styled.div`
 
 interface literal { [s: string]: () => any}
 
-const ingredient = (props : string) => {
+const ingredient = (ingName : string, idKey : number) => {
     let ingredients: literal = {
-        'BreadBottomSeeds' : () => <BreadBottom>
-            <Seeds1/>
-            <Seeds2/>
-        </BreadBottom>,
-        'BreadTopSeeds' : () => <BreadTop>
+        'BreadTopSeeds' : () => <BreadTop key = {idKey}>
             <Seeds1/>
             <Seeds2/>
         </BreadTop>,
-        'BreadBottom' : () => <BreadBottom/>,
-        'BreadTop' : () => <BreadTop/>,
-        'Meat' : () => <Meat/>,
-        'Cheese' : () => <Cheese/>,
-        'Salad' : () => <Salad/>,
-        'Bacon' : () => <Bacon/>,
+        'BreadBottom' : () => <BreadBottom key = {idKey}/>,
+        'BreadTop' : () => <BreadTop key = {idKey}/>,
+        'Meat' : () => <Meat key = {idKey}/>,
+        'Cheese' : () => <Cheese key = {idKey}/>,
+        'Salad' : () => <Salad key = {idKey}/>,
+        'Bacon' : () => <Bacon key = {idKey}/>,
+        'BreadBottomSeeds' : () => <BreadBottom key = {idKey}>
+            <Seeds1/>
+            <Seeds2/>
+        </BreadBottom>,
         'Default' : () => null 
     }
-    return (ingredients[props] || ingredients['Default'])();
+    return (ingredients[ingName] || ingredients['Default'])();
 }
 export default ingredient;

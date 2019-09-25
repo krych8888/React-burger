@@ -24,8 +24,7 @@ const BurgerDiv = styled.div`
 `;
 
 interface IBurgerProps {
-    ingredients : {
-        BreadBottomSeeds : number; 
+    ingredients : { 
         BreadTopSeeds : number;
         BreadBottom : number;
         BreadTop : number;
@@ -33,25 +32,22 @@ interface IBurgerProps {
         Cheese : number;
         Salad : number;
         Bacon : number;
+        BreadBottomSeeds : number;
+        [key: string]: number;
     }
-    [key: IBurgerProps]: number;
 }
 
 class Burger extends Component<IBurgerProps>{
-
-    readonly ingredients = Object.keys(this.props.ingredients)
-    .map(ingName => {
-        return [...Array(this.props.ingredients[ingName]].map((_, i) => {
-            Ingredient(ingName);
-        });
-    });
- 
     render(){
+        let ingredients : any = Object.keys(this.props.ingredients)
+        .map(ingName => {
+            return [...Array(this.props.ingredients[ingName])].map((_, i) => {
+                return Ingredient(ingName, i);
+            });
+        });
+        
         return <BurgerDiv>
-            {Ingredient("BreadTop")}
-            {Ingredient("Cheese")}
-            {Ingredient("Meat")}
-            {Ingredient("BreadBottom")}
+            {ingredients}
         </BurgerDiv>
     }
 }
