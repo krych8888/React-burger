@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import Ingredient from './Ingredient/Ingredient';
 
@@ -24,27 +24,34 @@ const BurgerDiv = styled.div`
 `;
 
 interface IBurgerProps {
-    ingredients : { 
-        BreadTopSeeds : number;
-        BreadBottom : number;
-        BreadTop : number;
-        Meat : number;
-        Cheese : number;
-        Salad : number;
-        Bacon : number;
-        BreadBottomSeeds : number;
+    ingredients: {
+        BreadTopSeeds: number;
+        BreadBottom: number;
+        BreadTop: number;
+        Meat: number;
+        Cheese: number;
+        Salad: number;
+        Bacon: number;
+        BreadBottomSeeds: number;
         [key: string]: number;
     }
 }
 
 class Burger extends Component<IBurgerProps>{
-    render(){
-        let ingredients : any = Object.keys(this.props.ingredients)
-        .map(ingName => {
-            return [...Array(this.props.ingredients[ingName])].map((_, i) => {
-                return Ingredient(ingName, i);
+    render() {
+        let ingredients: any = Object.keys(this.props.ingredients)
+            .map(ingName => {
+                return [...Array(this.props.ingredients[ingName])].map((_, i) => {
+                    return Ingredient(ingName, i);
+                });
+            })
+            .reduce((previousValue, currentValue) => {
+                return previousValue.concat(currentValue);
             });
-        });
+
+        ingredients = (ingredients.length >= 2) ?
+            <p>Pleas start adding ingredients</p>
+            : ingredients;
         
         return <BurgerDiv>
             {ingredients}
