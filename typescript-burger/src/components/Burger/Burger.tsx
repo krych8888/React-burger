@@ -50,11 +50,13 @@ class Burger extends Component<IBurgerProps>{
             });
 
         ingredients = (ingredients.length >= 2) ?
-            <p>Pleas start adding ingredients</p>
-            : ingredients;
+            ingredients:
+            <p>Pleas start adding ingredients</p>;
         
         return <BurgerDiv>
+            {Ingredient("BreadTopSeeds", 100)}
             {ingredients}
+            {Ingredient("BreadBottom", 200)}
         </BurgerDiv>
     }
 }
